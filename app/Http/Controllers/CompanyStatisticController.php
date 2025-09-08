@@ -12,7 +12,8 @@ class CompanyStatisticController extends Controller
      */
     public function index()
     {
-        //
+        $statistics = CompanyStatistic::all();
+        return view('admin.statistics.index', compact('statistics'));
     }
 
     /**
@@ -20,7 +21,7 @@ class CompanyStatisticController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.statistics.create');
     }
 
     /**
@@ -44,7 +45,7 @@ class CompanyStatisticController extends Controller
      */
     public function edit(CompanyStatistic $companyStatistic)
     {
-        //
+        
     }
 
     /**
