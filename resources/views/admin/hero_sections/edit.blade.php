@@ -17,7 +17,7 @@
                     @endforeach
                 @endif
 
-                <form method="POST" action="{{ route('admin.hero_sections.edit',$hero_section) }}" enctype="multipart/form-data"> 
+                <form method="POST" action="{{ route('admin.hero_sections.update',$hero_section) }}" enctype="multipart/form-data"> 
                     @csrf
                     @method('PUT')
                     <div>

@@ -75,7 +75,7 @@ class OurTeamController extends Controller
                 $validated['avatar'] = $avatarPath;
             }
 
-            $$team->update($validated);
+            $team->update($validated);
         });
 
         return redirect()->route('admin.teams.index');
