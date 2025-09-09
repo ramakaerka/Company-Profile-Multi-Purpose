@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -27,9 +30,20 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        
+        DB::transaction(function() use ($request){
+            $validated = $request->validated();
+            
+            if($request->hasFile('thumbnail')){
+                $thumbnailPath = $request->file('thumbnail')->store('thumbnails','public');
+                $validated['thumbnail'] = $thumbnailPath;
+            }
+
+            $newDataRecord = Product::create($validated);
+        });
+
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -45,15 +59,26 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        DB::transaction(function() use ($request, $product){
+            $validated = $request->validated();
+            
+            if($request->hasFile('thumbnail')){
+                $thumbnailPath = $request->file('thumbnail')->store('thumbnails','public');
+                $validated['thumbnail'] = $thumbnailPath;
+            }
+
+            $product->update($validated);
+        });
+
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -61,6 +86,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        DB::transaction(function() use ($product){
+            $product->delete();
+        });
+
+        return redirect()->route('admin.products.index');
     }
 }

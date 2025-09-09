@@ -24,7 +24,7 @@ class StoreTeamRequest extends FormRequest
         return [
             'occupation'=> 'required|string|max:255',
             'name'=> 'required|string|max:255',
-            'avatar'=> 'required|image|mime:png,jpg,jpeg',
+            'avatar'=> 'required|image|mimes:png,jpg,jpeg',
             'location'=> 'required|string|max:255',
         ];
     }

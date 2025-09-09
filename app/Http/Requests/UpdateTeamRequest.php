@@ -24,7 +24,7 @@ class UpdateTeamRequest extends FormRequest
         return [
             'occupation'=> 'required|string|max:255',
             'name'=> 'required|string|max:255',
-            'avatar'=> 'sometimes|image|mime:png,jpg,jpeg',
+            'avatar'=> 'sometimes|image|mimes:png,jpg,jpeg',
             'location'=> 'required|string|max:255',
         ];
     }

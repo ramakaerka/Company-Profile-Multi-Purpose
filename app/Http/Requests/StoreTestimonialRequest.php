@@ -22,7 +22,7 @@ class StoreTestimonialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'thumbnail'=> 'required|image|mime:png,jpg,jpeg',
+            'thumbnail'=> 'required|image|mimes:png,jpg,jpeg',
             'message'=> 'required|string|max:255',
             'project_client_id'=> 'required|integer',
         ];

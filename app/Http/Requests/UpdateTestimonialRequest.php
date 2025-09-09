@@ -22,7 +22,7 @@ class UpdateTestimonialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'thumbnail'=> 'sometimes|image|mime:png,jpg,jpeg',
+            'thumbnail'=> 'sometimes|image|mimes:png,jpg,jpeg',
             'message'=> 'required|string|max:255',
             'project_client_id'=> 'required|integer',
         ];
